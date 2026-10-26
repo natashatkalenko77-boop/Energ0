@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Банк документов — УМО 2026/2027</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; line-height: 1.6; color: #222; background: #eef1f5; padding: 20px; }
+  .page { max-width: 1150px; margin: 0 auto; background: #fff; padding: 35px 40px; border-radius: 12px; box-shadow: 0 3px 15px rgba(0,0,0,0.08); }
+  h1 { font-size: 26px; text-align: center; color: #1e3a5f; margin-bottom: 6px; line-height: 1.3; }
+  .school { text-align: center; font-size: 14px; color: #5a6b7d; margin-bottom: 4px; }
+  .year { text-align: center; display: block; width: fit-content; margin: 12px auto 25px; background: #1e3a5f; color: #fff; padding: 5px 20px; border-radius: 20px; font-size: 14px; }
+  .note { background: #f5f8fc; border-left: 4px solid #2c5a8c; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 28px; font-size: 14px; }
+  h2 { font-size: 18px; color: #1e3a5f; border-bottom: 2px solid #e1e7ee; padding-bottom: 6px; margin: 30px 0 14px; }
+  h3 { font-size: 16px; color: #1e3a5f; margin: 20px 0 8px; }
+  h4 { font-size: 15px; color: #1e3a5f; margin: 0 0 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 10px; }
+  th { background: #1e3a5f; color: #fff; text-align: left; padding: 10px 12px; font-size: 13px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #e6ebf1; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  a { color: #1a5a9c; text-decoration: none; border-bottom: 1px dashed #9bb8d4; }
+  a:hover { border-bottom-style: solid; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 2px solid #e1e7ee; margin-bottom: 24px; }
+  .tab-btn { padding: 12px 20px; background: transparent; border: none; border-bottom: 3px solid transparent; font-size: 14px; font-weight: 600; color: #5a6b7d; cursor: pointer; transition: all 0.2s; margin-bottom: -2px; border-radius: 8px 8px 0 0; }
+  .tab-btn:hover { color: #1e3a5f; background: #f5f8fc; }
+  .tab-btn.active { color: #1e3a5f; border-bottom-color: #1e3a5f; background: #f5f8fc; }
+  .tab-content { display: none; animation: fadeIn 0.3s ease; }
+  .tab-content.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .print { text-align: right; margin-top: 30px; padding-top: 18px; border-top: 2px solid #e1e7ee; }
+  .btn { background: #1e3a5f; color: #fff; border: none; padding: 12px 28px; font-size: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+  .btn:hover { background: #2c5a8c; }
+
+  .sanpin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin: 15px 0 25px; }
+  .sanpin-card { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 18px 20px; }
+  .sanpin-card .sc-icon { font-size: 22px; margin-bottom: 6px; }
+  .sanpin-card h4 { font-size: 15px; color: #1e3a5f; margin: 0 0 10px; }
+  .sanpin-card ul { list-style: none; padding: 0; margin: 0; }
+  .sanpin-card ul li { position: relative; padding-left: 20px; margin-bottom: 8px; font-size: 13px; }
+  .sanpin-card ul li::before { content: "•"; position: absolute; left: 4px; color: #2c5a8c; font-weight: bold; }
+  .sanpin-card .highlight { background: #fff5f5; color: #b03030; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+  .sanpin-card .allow { background: #f0fff4; color: #2d7a6b; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+
+  .levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 15px 0; }
+  .level { border-radius: 10px; padding: 14px; font-size: 13px; border-left: 5px solid; }
+  .level b { display: block; margin-bottom: 4px; font-size: 14px; }
+  .lvl-1 { background: #fff5f5; border-color: #d9534f; }
+  .lvl-2 { background: #fff9e6; border-color: #f0ad4e; }
+  .lvl-3 { background: #f0f7ff; border-color: #2c5a8c; }
+  .lvl-4 { background: #f0fff4; border-color: #4a7c59; }
+
+  .mark-schemes { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px; margin: 15px 0 25px; }
+  .mark-scheme { border: 1px solid #dfe6ee; border-radius: 12px; overflow: hidden; background: #fbfcfe; }
+  .ms-head { padding: 14px 18px; color: #fff; font-size: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .ms-head .title { font-weight: bold; }
+  .ms-head .total { background: rgba(255,255,255,0.25); padding: 3px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+  .ms-head-5 { background: #1e3a5f; }
+  .ms-head-10 { background: #4a2d5c; }
+  .ms-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ms-table th { background: #f0f3f8; color: #1e3a5f; padding: 8px 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .ms-table td { padding: 9px 12px; border-bottom: 1px solid #eef1f5; }
+  .ms-table tr:last-child td { border-bottom: none; }
+  .ms-table .num-cell { font-weight: bold; color: #1e3a5f; text-align: center; width: 60px; }
+  .ms-table .pts-cell { font-weight: bold; text-align: right; width: 80px; }
+  .ms-table .total-row td { background: #eef3f9; font-weight: bold; color: #1e3a5f; border-top: 2px solid #2c5a8c; }
+  .ms-table .lvl-tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; color: #fff; }
+  .lvl-tag-1 { background: #d9534f; }
+  .lvl-tag-2 { background: #e08a2e; }
+  .lvl-tag-3 { background: #2c5a8c; }
+  .lvl-tag-4 { background: #2d7a6b; }
+  .lvl-tag-5 { background: #4a7c59; }
+  .ms-convert { padding: 14px 18px 16px; border-top: 1px dashed #dfe6ee; background: #fff; }
+  .ms-convert-title { font-size: 12px; font-weight: bold; color: #1e3a5f; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 10px; }
+  .convert-row { display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 8px; margin-bottom: 6px; font-size: 13px; color: #fff; }
+  .convert-row:last-child { margin-bottom: 0; }
+  .convert-row .from { font-weight: bold; min-width: 90px; background: rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 6px; text-align: center; }
+  .convert-row .arrow { font-size: 16px; }
+  .convert-row .to { font-weight: bold; }
+  .cr-1 { background: #d9534f; }
+  .cr-2 { background: #e08a2e; }
+  .cr-3 { background: #2c5a8c; }
+  .cr-4 { background: #2d7a6b; }
+  .cr-5 { background: #4a7c59; }
+
+  .error-block { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .error-block h4 { font-size: 15px; color: #1e3a5f; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .error-block .badge-red { background: #d9534f; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+  .error-block .badge-orange { background: #e08a2e; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+  .error-block .badge-blue { background: #2c5a8c; color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+  .error-list { list-style: none; padding: 0; margin: 0; }
+  .error-list li { position: relative; padding-left: 22px; margin-bottom: 7px; font-size: 13px; }
+  .error-list li::before { content: "—"; position: absolute; left: 2px; color: #2c5a8c; font-weight: bold; }
+  .penalty-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+  .penalty-table th { background: #f0f3f8; color: #1e3a5f; padding: 8px 12px; font-size: 12px; text-align: left; }
+  .penalty-table td { padding: 8px 12px; border-bottom: 1px solid #eef1f5; }
+  .penalty-table .mark-cell { font-weight: bold; color: #1e3a5f; text-align: center; width: 60px; }
+  .penalty-table .err-cell { text-align: center; }
+
+  .rules-box { background: #f7f9fc; border: 1px solid #dfe6ee; border-radius: 12px; padding: 20px 24px; margin: 15px 0; }
+  .rules-box h3 { margin-top: 0; font-size: 16px; color: #1e3a5f; }
+  .rules-list { list-style: none; padding-left: 0; margin: 0; }
+  .rules-list li { position: relative; padding-left: 26px; margin-bottom: 10px; font-size: 14px; }
+  .rules-list li::before { content: "●"; position: absolute; left: 6px; color: #2c5a8c; font-size: 10px; top: 5px; }
+  .rules-list li strong { color: #1e3a5f; }
+  .doc-ref { font-size: 12px; color: #5a6b7d; margin-top: 12px; padding-top: 10px; border-top: 1px dashed #dfe6ee; }
+
+  .fg-def { background: #eef3f9; border-radius: 12px; padding: 20px 24px; margin: 15px 0 22px; font-size: 14px; }
+  .fg-def b { color: #1e3a5f; }
+  .fg-components { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 15px 0 25px; }
+  .fg-comp { background: #f7f9fc; border: 1px solid #dfe6ee; border-radius: 10px; padding: 14px 16px; font-size: 13px; }
+  .fg-comp b { display: block; color: #1e3a5f; font-size: 14px; margin-bottom: 4px; }
+  .fg-task { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .fg-task .subject-tag { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; color: #fff; margin-bottom: 8px; }
+  .tag-math { background: #1e3a5f; }
+  .tag-phys { background: #2d4a3e; }
+  .tag-inf { background: #4a2d5c; }
+  .fg-task h4 { margin: 0 0 6px; font-size: 15px; color: #1e3a5f; }
+  .fg-task .task-text { font-size: 14px; margin-bottom: 8px; }
+  .fg-task .task-source { font-size: 12px; color: #5a6b7d; border-top: 1px dashed #dfe6ee; padding-top: 8px; margin-top: 8px; }
+
+  .link-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 15px 0 25px; }
+  .link-card { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.15s; text-decoration: none; color: inherit; border-bottom: 1px solid #dfe6ee; }
+  .link-card:hover { box-shadow: 0 4px 14px rgba(30,58,95,0.12); transform: translateY(-2px); border-bottom-style: solid; }
+  .link-card .lc-icon { font-size: 22px; margin-bottom: 8px; }
+  .link-card .lc-title { font-size: 15px; font-weight: bold; color: #1e3a5f; margin-bottom: 4px; line-height: 1.35; }
+  .link-card .lc-desc { font-size: 13px; color: #4a5b6e; flex-grow: 1; margin-bottom: 10px; }
+  .link-card .lc-url { font-size: 12px; color: #1a5a9c; word-break: break-all; font-family: 'Courier New', monospace; background: #f5f8fc; padding: 4px 8px; border-radius: 6px; border: none; }
+  .niko-banner { background: linear-gradient(135deg, #1e3a5f, #2c5a8c); color: #fff; border-radius: 12px; padding: 22px 26px; margin: 20px 0; }
+  .niko-banner h3 { color: #fff; margin-top: 0; font-size: 17px; border: none; padding: 0; }
+  .niko-banner p { font-size: 14px; margin-bottom: 14px; opacity: 0.95; }
+  .niko-banner a { display: inline-block; background: #fff; color: #1e3a5f; padding: 9px 20px; border-radius: 8px; font-weight: bold; font-size: 14px; border: none; margin-right: 8px; margin-bottom: 6px; }
+  .niko-banner a:hover { background: #e8eef5; border-bottom: none; }
+
+  .lesson-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 15px 0 25px; }
+  .compare-col { border-radius: 12px; padding: 18px 20px; font-size: 13px; }
+  .compare-old { background: #fff5f5; border: 1px solid #f0c0c0; }
+  .compare-new { background: #f0fff4; border: 1px solid #b8dfc8; }
+  .compare-col h4 { margin: 0 0 10px; font-size: 14px; }
+  .compare-old h4 { color: #b03030; }
+  .compare-new h4 { color: #2d7a6b; }
+  .compare-col ul { padding-left: 18px; margin: 0; }
+  .compare-col ul li { margin-bottom: 6px; }
+  .stage-flow { display: flex; flex-direction: column; gap: 0; margin: 15px 0 25px; }
+  .stage-step { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: 10px; margin-bottom: 8px; background: #f7f9fc; border: 1px solid #dfe6ee; }
+  .stage-step .stage-num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: #1e3a5f; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; }
+  .stage-step .stage-body { flex: 1; }
+  .stage-step .stage-body b { display: block; font-size: 14px; color: #1e3a5f; margin-bottom: 4px; }
+  .stage-step .stage-body span { font-size: 13px; color: #4a5b6e; }
+  .stage-step .stage-time { flex-shrink: 0; font-size: 12px; color: #5a6b7d; background: #eef3f9; padding: 4px 10px; border-radius: 12px; font-weight: bold; align-self: center; }
+  .example-card { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
+  .example-card .ex-tag { display: inline-block; background: #1e3a5f; color: #fff; font-size: 11px; font-weight: bold; padding: 3px 12px; border-radius: 12px; margin-bottom: 8px; }
+  .example-card h4 { margin: 0 0 8px; font-size: 15px; color: #1e3a5f; }
+  .example-card .ex-text { font-size: 14px; margin-bottom: 8px; }
+  .example-card .ex-note { font-size: 12px; color: #5a6b7d; border-top: 1px dashed #dfe6ee; padding-top: 8px; margin-top: 8px; }
+
+  .reflection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0 25px; }
+  .refl-card { border-radius: 14px; padding: 20px; color: #fff; position: relative; overflow: hidden; min-height: 240px; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+  .refl-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.18); }
+  .refl-card .refl-emoji { font-size: 38px; margin-bottom: 8px; line-height: 1; }
+  .refl-card .refl-title { font-size: 17px; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.2px; }
+  .refl-card .refl-desc { font-size: 13px; line-height: 1.5; margin-bottom: 12px; opacity: 0.97; }
+  .refl-card .refl-example { font-size: 12px; background: rgba(255,255,255,0.2); padding: 10px 12px; border-radius: 8px; border-left: 3px solid rgba(255,255,255,0.7); margin-top: auto; }
+  .refl-card .refl-example b { display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.9; }
+  .refl-traffic { background: linear-gradient(135deg, #e08a2e, #d9534f); }
+  .refl-ladder { background: linear-gradient(135deg, #2c5a8c, #4a7c59); }
+  .refl-cinquain { background: linear-gradient(135deg, #7c5a8c, #4a2d5c); }
+  .refl-hats { background: linear-gradient(135deg, #2d4a3e, #1e3a5f); }
+  .refl-cloud { background: linear-gradient(135deg, #4a7c59, #2d7a6b); }
+  .refl-sentence { background: linear-gradient(135deg, #1e3a5f, #4a2d5c); }
+  .refl-island { background: linear-gradient(135deg, #2d7a6b, #4a7c59); }
+  .refl-tree { background: linear-gradient(135deg, #4a7c59, #2c5a8c); }
+  .refl-smile { background: linear-gradient(135deg, #e08a2e, #f0ad4e); }
+  .refl-mail { background: linear-gradient(135deg, #d9534f, #7c5a8c); }
+
+  .edu-intro { background: #eef3f9; border-radius: 12px; padding: 20px 24px; margin: 15px 0 22px; font-size: 14px; }
+  .edu-intro b { color: #1e3a5f; }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 15px 0 25px; }
+  .edu-card { background: #fff; border: 1px solid #dfe6ee; border-radius: 12px; padding: 18px 20px; }
+  .edu-card .edu-tag { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 11px; font-weight: bold; color: #fff; margin-bottom: 8px; }
+  .edu-card h4 { margin: 0 0 8px; font-size: 15px; color: #1e3a5f; }
+  .edu-card .edu-desc { font-size: 13px; color: #4a5b6e; margin-bottom: 10px; }
+  .edu-card .edu-example { background: #f7f9fc; border-radius: 8px; padding: 12px 14px; font-size: 13px; border-left: 3px solid #2c5a8c; }
+  .edu-card .edu-example b { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: #2c5a8c; margin-bottom: 4px; }
+  .tag-edu-math { background: #1e3a5f; }
+  .tag-edu-phys { background: #2d4a3e; }
+  .tag-edu-inf { background: #4a2d5c; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; padding: 10px; max-width: 100%; }
+    .print { display: none; }
+    .tabs { display: none; }
+    .tab-content { display: block !important; page-break-after: always; }
+    .tab-content:last-of-type { page-break-after: auto; }
+    th { background: #1e3a5f !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    tr:nth-child(even) td { background: #f2f5f9 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .ms-head, .ms-table th, .convert-row, .level, .rules-box, .ms-table .total-row td,
+    .fg-def, .fg-comp, .fg-task, .niko-banner, .link-card, .sanpin-card,
+    .error-block, .penalty-table th, .compare-col, .stage-step, .example-card,
+    .refl-card, .reflection-grid, .edu-intro, .edu-card {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    a { border-bottom: none; }
+    h2, h3, h4 { page-break-after: avoid; }
+    tr { page-break-inside: avoid; }
+    .mark-scheme, .rules-box, .fg-task, .fg-components, .link-card, .niko-banner,
+    .sanpin-card, .error-block, .compare-col, .stage-step, .example-card, .refl-card,
+    .edu-card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="school">Государственное учреждение образования «Средняя школа № 224 г. Минска»</div>
+  <h1>Банк документов для УМО</h1>
+  <div class="school">Математика · Физика · Информатика</div>
+  <span class="year">2026/2027 учебный год</span>
+
+  <div class="note">
+    <b>Что здесь:</b> нормативные документы, нормы оценки, требования СанПиН, правила заполнения журнала,
+    материалы по функциональной грамотности, современному уроку и воспитательному потенциалу предметов.
+    Дата обновления — сентябрь 2026 года.
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab(event, 'tab-docs')">📄 Документы</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-marks')">🎯 Нормы и разбаловка</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-sanpin')">📋 Контрольные и СанПиН</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-journal')">📓 Журнал</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-fg')">🌍 Функциональная грамотность</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-lesson')">📐 Современный урок</button>
+    <button class="tab-btn" onclick="openTab(event, 'tab-edu')">🌱 Воспитательный потенциал</button>
+  </div>
+
+  <!-- ========== 1. ДОКУМЕНТЫ ========== -->
+  <div id="tab-docs" class="tab-content active">
+    <h2>1. Конституция и кодексы</h2>
+    <table>
+      <tr><th style="width:42%">Документ</th><th style="width:28%">Реквизиты</th><th style="width:30%">Где смотреть</th></tr>
+      <tr><td>Конституция Республики Беларусь</td><td>с изменениями и дополнениями</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Кодекс Республики Беларусь об образовании</td><td>от 13.01.2011 № 243-З (ред. от 09.12.2025)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+    </table>
+    <h2>2. Законы Республики Беларусь</h2>
+    <table>
+      <tr><th style="width:42%">Документ</th><th style="width:28%">Реквизиты</th><th style="width:30%">Где смотреть</th></tr>
+      <tr><td>О правах ребёнка</td><td>от 19.11.1993 № 2572-XII</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Об изменении Кодекса об образовании</td><td>от 14.01.2022 № 154-З</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+    </table>
+    <h2>3. Постановления Совета Министров</h2>
+    <table>
+      <tr><th style="width:42%">Документ</th><th style="width:28%">Реквизиты</th><th style="width:30%">Где смотреть</th></tr>
+      <tr><td>Специфические санитарно-эпидемиологические требования к содержанию и эксплуатации учреждений образования</td><td>от 07.08.2019 № 525 (ред. от 12.07.2024 № 502)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Об утверждении профессионального стандарта (педагогические работники)</td><td>вступает в силу с 01.01.2026</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+    </table>
+    <h2>4. Постановления Министерства образования</h2>
+    <table>
+      <tr><th style="width:42%">Документ</th><th style="width:28%">Реквизиты</th><th style="width:30%">Где смотреть</th></tr>
+      <tr><td>Об утверждении образовательных стандартов общего среднего образования</td><td>от 25.11.2025 № 199 (в силе с 01.01.2026)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Об утверждении учебных программ по физике и астрономии</td><td>от 29.07.2025 № 132</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Правила проведения аттестации учащихся</td><td>от 11.07.2022 № 184</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Изменения в Правила аттестации</td><td>от 21.02.2025 № 43</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>О типовых формах классного журнала</td><td>от 27.01.2023 № 28 (ред. от 21.11.2024)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Об утверждении типового учебного плана общего среднего образования</td><td>от 23.04.2025 № 75 (ред. от 20.05.2026 № 104)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Правила безопасности организации образовательного процесса</td><td>от 03.08.2022 № 227 (ред. от 01.08.2025 № 136)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Об утверждении Инструкции о порядке проведения аттестации педагогических работников</td><td>постановление МО РБ (действующая редакция)</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+    </table>
+    <h2>5. Инструктивно-методические письма (ИМП) на 2026/2027 учебный год</h2>
+    <table>
+      <tr><th style="width:55%">Документ</th><th style="width:45%">Где смотреть</th></tr>
+      <tr><td>ИМП «Об организации образовательного процесса при изучении учебных предметов и проведении факультативных занятий» (общая часть)</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Приложение 5. Особенности преподавания учебного предмета «Математика»</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Приложение 6. Особенности преподавания учебного предмета «Информатика»</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Приложение 11. Особенности преподавания учебных предметов «Физика» и «Астрономия»</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Методические рекомендации по формированию культуры устной и письменной речи</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+    </table>
+    <h2>6. Государственные программы и концепции</h2>
+    <table>
+      <tr><th style="width:55%">Документ</th><th style="width:45%">Где смотреть</th></tr>
+      <tr><td>Государственная программа «Беларусь интеллектуальная» на 2026–2030 годы</td><td><a href="https://nacedu.by" target="_blank">nacedu.by</a></td></tr>
+      <tr><td>Концепция развития профессиональной ориентации молодёжи</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Программа непрерывного воспитания детей и учащейся молодёжи</td><td><a href="https://edu.gov.by" target="_blank">edu.gov.by</a></td></tr>
+    </table>
+    <h2>7. Дополнительные материалы для учителя</h2>
+    <table>
+      <tr><th style="width:55%">Документ / материал</th><th style="width:45%">Где смотреть</th></tr>
+      <tr><td>Государственный школьный стандарт</td><td><a href="https://edu.gov.by" target="_blank">edu.gov.by</a></td></tr>
+      <tr><td>Инструкция о делопроизводстве в государственных органах и организациях</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+      <tr><td>Методические рекомендации по освещению политики геноцида белорусского народа</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Методические рекомендации по использованию интернет-проектов в образовательном процессе</td><td><a href="https://adu.by" target="_blank">adu.by</a></td></tr>
+      <tr><td>Перечни международных олимпиад и конкурсов профессионального мастерства на 2026 год</td><td><a href="https://pravo.by" target="_blank">pravo.by</a></td></tr>
+    </table>
+  </div>
+
+  <!-- ========== 2. НОРМЫ И РАЗБАЛОВКА ========== -->
+  <div id="tab-marks" class="tab-content">
+    <h2>Кратко о нормах оценки (10-балльная шкала)</h2>
+    <p style="font-size:14px; margin-bottom:10px;">Оценка по математике, физике и информатике строится по уровням учебной деятельности. Внутри каждого уровня разница между низшим и высшим баллами связана с полнотой и самостоятельностью выполнения.</p>
+    <div class="levels">
+      <div class="level lvl-1"><b>1–2 балла</b>Узнавание и воспроизведение. Ученик различает объекты, но не может применить знания без помощи учителя.</div>
+      <div class="level lvl-2"><b>3–4 балла</b>Понимание и применение по образцу. Выполняет типовые задания с подсказкой или по алгоритму.</div>
+      <div class="level lvl-3"><b>5–6 баллов</b>Применение в знакомой ситуации. Решает стандартные задачи самостоятельно, допускает несущественные ошибки.</div>
+      <div class="level lvl-4"><b>7–8 баллов</b>Применение в изменённой ситуации. Свободно владеет материалом, переносит знания на новые задачи.</div>
+      <div class="level lvl-4" style="border-color:#1e3a5f;"><b>9–10 баллов</b>Творческий уровень. Решает нестандартные задачи, использует межпредметные связи, обосновывает решение.</div>
+    </div>
+    <p style="font-size:13px; color:#555; margin-bottom:18px;">Источник: Нормы оценки результатов учебной деятельности учащихся по учебному предмету «Математика» (приложение 10 к Правилам проведения аттестации, утв. постановлением МО РБ № 184).</p>
+
+    <h3>Схемы перевода выполненных заданий в отметку (математика)</h3>
+    <div class="mark-schemes">
+      <div class="mark-scheme">
+        <div class="ms-head ms-head-5"><span class="title">Контрольная работа на 5 заданий</span><span class="total">максимум 30 баллов</span></div>
+        <table class="ms-table">
+          <tr><th class="num-cell">№</th><th>Уровень</th><th class="pts-cell">Макс. баллов</th></tr>
+          <tr><td class="num-cell">1</td><td><span class="lvl-tag lvl-tag-1">Узнавание</span></td><td class="pts-cell">2</td></tr>
+          <tr><td class="num-cell">2</td><td><span class="lvl-tag lvl-tag-2">Воспроизведение</span></td><td class="pts-cell">4</td></tr>
+          <tr><td class="num-cell">3</td><td><span class="lvl-tag lvl-tag-3">Применение (знакомая)</span></td><td class="pts-cell">6</td></tr>
+          <tr><td class="num-cell">4</td><td><span class="lvl-tag lvl-tag-4">Применение (новая)</span></td><td class="pts-cell">8</td></tr>
+          <tr><td class="num-cell">5</td><td><span class="lvl-tag lvl-tag-5">Творчество</span></td><td class="pts-cell">10</td></tr>
+          <tr class="total-row"><td colspan="2" style="text-align:right;">Итого:</td><td class="pts-cell">30</td></tr>
+        </table>
+        <div class="ms-convert">
+          <div class="ms-convert-title">Шкала перевода (официальная)</div>
+          <div class="convert-row cr-1"><span class="from">1 балл</span><span class="arrow">→</span><span class="to">1</span></div>
+          <div class="convert-row cr-1"><span class="from">2 балла</span><span class="arrow">→</span><span class="to">2</span></div>
+          <div class="convert-row cr-2"><span class="from">3–5</span><span class="arrow">→</span><span class="to">3</span></div>
+          <div class="convert-row cr-2"><span class="from">6–8</span><span class="arrow">→</span><span class="to">4</span></div>
+          <div class="convert-row cr-3"><span class="from">9–11</span><span class="arrow">→</span><span class="to">5</span></div>
+          <div class="convert-row cr-3"><span class="from">12–14</span><span class="arrow">→</span><span class="to">6</span></div>
+          <div class="convert-row cr-4"><span class="from">15–18</span><span class="arrow">→</span><span class="to">7</span></div>
+          <div class="convert-row cr-4"><span class="from">19–23</span><span class="arrow">→</span><span class="to">8</span></div>
+          <div class="convert-row cr-5"><span class="from">24–28</span><span class="arrow">→</span><span class="to">9</span></div>
+          <div class="convert-row cr-5"><span class="from">29–30</span><span class="arrow">→</span><span class="to">10</span></div>
+        </div>
+      </div>
+      <div class="mark-scheme">
+        <div class="ms-head ms-head-10"><span class="title">Контрольная работа на 10 заданий</span><span class="total">максимум 55 баллов</span></div>
+        <table class="ms-table">
+          <tr><th class="num-cell">№</th><th>Уровень</th><th class="pts-cell">Макс. баллов</th></tr>
+          <tr><td class="num-cell">1</td><td><span class="lvl-tag lvl-tag-1">Узнавание</span></td><td class="pts-cell">1</td></tr>
+          <tr><td class="num-cell">2</td><td><span class="lvl-tag lvl-tag-1">Узнавание</span></td><td class="pts-cell">2</td></tr>
+          <tr><td class="num-cell">3</td><td><span class="lvl-tag lvl-tag-2">Воспроизведение</span></td><td class="pts-cell">3</td></tr>
+          <tr><td class="num-cell">4</td><td><span class="lvl-tag lvl-tag-2">Воспроизведение</span></td><td class="pts-cell">4</td></tr>
+          <tr><td class="num-cell">5</td><td><span class="lvl-tag lvl-tag-3">Применение (знакомая)</span></td><td class="pts-cell">5</td></tr>
+          <tr><td class="num-cell">6</td><td><span class="lvl-tag lvl-tag-3">Применение (знакомая)</span></td><td class="pts-cell">6</td></tr>
+          <tr><td class="num-cell">7</td><td><span class="lvl-tag lvl-tag-4">Применение (новая)</span></td><td class="pts-cell">7</td></tr>
+          <tr><td class="num-cell">8</td><td><span class="lvl-tag lvl-tag-4">Применение (новая)</span></td><td class="pts-cell">8</td></tr>
+          <tr><td class="num-cell">9</td><td><span class="lvl-tag lvl-tag-5">Творчество</span></td><td class="pts-cell">9</td></tr>
+          <tr><td class="num-cell">10</td><td><span class="lvl-tag lvl-tag-5">Творчество</span></td><td class="pts-cell">10</td></tr>
+          <tr class="total-row"><td colspan="2" style="text-align:right;">Итого:</td><td class="pts-cell">55</td></tr>
+        </table>
+        <div class="ms-convert">
+          <div class="ms-convert-title">Шкала перевода (официальная)</div>
+          <div class="convert-row cr-1"><span class="from">1</span><span class="arrow">→</span><span class="to">1</span></div>
+          <div class="convert-row cr-1"><span class="from">2–4</span><span class="arrow">→</span><span class="to">2</span></div>
+          <div class="convert-row cr-2"><span class="from">5–7</span><span class="arrow">→</span><span class="to">3</span></div>
+          <div class="convert-row cr-2"><span class="from">8–12</span><span class="arrow">→</span><span class="to">4</span></div>
+          <div class="convert-row cr-3"><span class="from">13–18</span><span class="arrow">→</span><span class="to">5</span></div>
+          <div class="convert-row cr-3"><span class="from">19–25</span><span class="arrow">→</span><span class="to">6</span></div>
+          <div class="convert-row cr-4"><span class="from">26–33</span><span class="arrow">→</span><span class="to">7</span></div>
+          <div class="convert-row cr-4"><span class="from">34–42</span><span class="arrow">→</span><span class="to">8</span></div>
+          <div class="convert-row cr-5"><span class="from">43–52</span><span class="arrow">→</span><span class="to">9</span></div>
+          <div class="convert-row cr-5"><span class="from">53–55</span><span class="arrow">→</span><span class="to">10</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:20px;">
+      <b>Важно:</b> при частичном выполнении задания баллы начисляются пропорционально. Итоговая отметка выставляется по суммарному баллу в соответствии с официальной шкалой перевода.
+    </div>
+
+    <h2>Как снимать баллы за ошибки (математика)</h2>
+    <div class="error-block">
+      <h4>Существенные (грубые) ошибки <span class="badge-red">задание не выполнено</span></h4>
+      <ul class="error-list">
+        <li>пропуск действий; лишние действия;</li>
+        <li>вычислительные ошибки; неправильное выполнение арифметических действий; нарушение порядка выполнения действий;</li>
+        <li>неправильная постановка знаков «>», «<» или «=» при сравнении чисел, числовых выражений и величин;</li>
+        <li>неправильное составление уравнения; нарушение алгоритма решения уравнения и неравенства;</li>
+        <li>несоответствие выполненных измерений и геометрических построений заданным параметрам;</li>
+        <li>неверный перевод одних единиц измерения величин в другие;</li>
+        <li>несоответствие ответа задания, наименования величин выполненным действиям и полученным результатам;</li>
+        <li>неправильный ответ или его отсутствие в математическом диктанте.</li>
+      </ul>
+      <p style="font-size:13px; margin-top:10px; margin-bottom:0;"><b>Правило:</b> если при выполнении задания допущена существенная ошибка, <b>задание считается невыполненным</b>, балл за него не начисляется.</p>
+    </div>
+    <div class="error-block">
+      <h4>Несущественные (негрубые) ошибки <span class="badge-orange">−10% за каждую</span></h4>
+      <ul class="error-list">
+        <li>замена данных в задании (цифры, числа, знака) при условии правильного выполнения задания с изменёнными данными;</li>
+        <li>отсутствие наименований в оформлении задачи;</li>
+        <li>неточность формулировок, определений, математических утверждений;</li>
+        <li>недостаточное обоснование существенных утверждений решения;</li>
+        <li>исключение без объяснения одного из корней уравнения;</li>
+        <li>построение графика линейной функции по трём точкам;</li>
+        <li>запись ответа с иррациональностью в знаменателе;</li>
+        <li>запись ответа в виде сократимой или неправильной дроби;</li>
+        <li>небрежность и неаккуратность записей, рисунков, чертежей.</li>
+      </ul>
+      <p style="font-size:13px; margin-top:10px; margin-bottom:0;"><b>Правило:</b> количество баллов за выполнение задания <b>снижается на 10% за каждую несущественную или логическую ошибку</b>.</p>
+    </div>
+    <div class="error-block">
+      <h4>Логические ошибки <span class="badge-blue">приравниваются к несущественным</span></h4>
+      <ul class="error-list">
+        <li>ошибки в рассуждениях и доказательствах, вызванные нарушением правил и законов логики;</li>
+        <li>неправильное употребление логических связок «и», «или», «если…, то…»;</li>
+        <li>нечёткое понимание идеи доказательства методом от противного.</li>
+      </ul>
+      <p style="font-size:13px; margin-top:10px; margin-bottom:0;"><b>Правило:</b> логические ошибки учитываются так же, как несущественные — <b>снижение на 10% за каждую</b>.</p>
+    </div>
+    <div class="error-block">
+      <h4>Исправления в письменных работах</h4>
+      <table class="penalty-table">
+        <tr><th>Количество исправлений</th><th>Снижение отметки</th></tr>
+        <tr><td>1–2 исправления</td><td style="color:#2d7a6b; font-weight:bold;">отметка не снижается</td></tr>
+        <tr><td>3–7 исправлений</td><td style="color:#e08a2e; font-weight:bold;">−1 балл</td></tr>
+        <tr><td>более 7 исправлений</td><td style="color:#d9534f; font-weight:bold;">−2 балла</td></tr>
+      </table>
+      <p style="font-size:13px; margin-top:10px; margin-bottom:0;">Два исправления на месте существенных ошибок приравниваются к <b>одной несущественной ошибке</b>. В математическом диктанте два исправления приравниваются к <b>одной существенной ошибке</b>.</p>
+    </div>
+    <h3>Соответствие количества ошибок и отметки</h3>
+    <table class="penalty-table">
+      <tr><th>Отметка</th><th>Количество ошибок</th></tr>
+      <tr><td class="mark-cell">1</td><td class="err-cell">более 7 существенных ошибок</td></tr>
+      <tr><td class="mark-cell">2</td><td class="err-cell">7 существенных ошибок</td></tr>
+      <tr><td class="mark-cell">3</td><td class="err-cell">6 существенных ошибок</td></tr>
+      <tr><td class="mark-cell">4</td><td class="err-cell">5 существенных ошибок</td></tr>
+      <tr><td class="mark-cell">5</td><td class="err-cell">4 существенные ошибки</td></tr>
+      <tr><td class="mark-cell">6</td><td class="err-cell">3 существенные ошибки</td></tr>
+      <tr><td class="mark-cell">7</td><td class="err-cell">2 существенные ошибки</td></tr>
+      <tr><td class="mark-cell">8</td><td class="err-cell">1 существенная ошибка</td></tr>
+      <tr><td class="mark-cell">9</td><td class="err-cell">1 несущественная ошибка</td></tr>
+      <tr><td class="mark-cell">10</td><td class="err-cell">0 ошибок, без исправлений</td></tr>
+    </table>
+    <div class="note" style="margin-top:20px;">
+      <b>Источники:</b> Нормы оценки результатов учебной деятельности учащихся по учебному предмету «Математика» (приложение 10 к постановлению МО РБ от 11.07.2022 № 184); Методические указания по организации контроля и оценки результатов учебной деятельности учащихся; Методические рекомендации по формированию культуры устной и письменной речи (утв. 21.08.2023, ред. от 15.11.2024).
+    </div>
+  </div>
+
+  <!-- ========== 3. КОНТРОЛЬНЫЕ И САНПИН ========== -->
+  <div id="tab-sanpin" class="tab-content">
+    <h2>Санитарные нормы и основные требования к контрольным работам</h2>
+    <p style="font-size:14px; margin-bottom:12px;">Порядок проведения контрольных и самостоятельных работ, а также объём домашних заданий регламентируются <b>постановлением Совета Министров Республики Беларусь от 07.08.2019 № 525</b> (в редакции от 12.07.2024 № 502) и инструктивно-методическими письмами Министерства образования.</p>
+    <div class="sanpin-grid">
+      <div class="sanpin-card">
+        <div class="sc-icon">📅</div>
+        <h4>Когда можно проводить контрольные работы</h4>
+        <ul>
+          <li><strong>Не более одного предмета в день</strong> в одном классе. Контрольные работы проводятся строго по графику, утверждённому руководителем учреждения образования <span class="highlight">п. 67</span></li>
+          <li><strong>Понедельник:</strong> <span class="allow">разрешено</span> (запрет снят с 2019 года)</li>
+          <li><strong>Вторник, среда, четверг:</strong> <span class="allow">разрешено</span> (кроме последнего урока)</li>
+          <li><strong>Пятница (и суббота, если учебный день):</strong><br>&nbsp;&nbsp;— для <b>I–IV классов</b> — <span class="highlight">запрещено</span>;<br>&nbsp;&nbsp;— для <b>V–XI классов</b> — <span class="allow">разрешено только до 3-го урока</span> (1, 2 или 3 урок) <span class="highlight">п. 67</span></li>
+        </ul>
+      </div>
+      <div class="sanpin-card">
+        <div class="sc-icon">⏱️</div>
+        <h4>Объём домашнего задания (СанПиН)</h4>
+        <ul>
+          <li><b>2 класс</b> — до <b>1,2 часа</b></li>
+          <li><b>3–4 классы</b> — до <b>1,5 часа</b></li>
+          <li><b>5–6 классы</b> — до <b>2 часов</b></li>
+          <li><b>7–8 классы</b> — до <b>2,5 часов</b></li>
+          <li><b>9–11 (12) классы</b> — до <b>3 часов</b></li>
+          <li><strong>1 класс</strong> — домашние задания <b>не задаются</b> в течение всего учебного года <span class="highlight">п. 131</span></li>
+        </ul>
+      </div>
+      <div class="sanpin-card">
+        <div class="sc-icon">✍️</div>
+        <h4>Объём письменной работы</h4>
+        <ul>
+          <li>Объём домашней работы не должен превышать <b>30%</b> (или 1/3) объёма работы, выполненной в классе <span class="highlight">методические рекомендации</span></li>
+          <li>Задания, помеченные <b>«звёздочкой»</b>, на дом <b>не задаются</b></li>
+          <li>Задания повышенного уровня сложности предлагаются <b>только по желанию</b> учащегося</li>
+          <li>Домашние задания <b>на каникулы не задаются</b> <span class="highlight">ст. 1 Кодекса об образовании</span></li>
+        </ul>
+      </div>
+      <div class="sanpin-card">
+        <div class="sc-icon">🚫</div>
+        <h4>Что запрещено при проведении контрольных</h4>
+        <ul>
+          <li><b>Понедельник:</b> <span class="allow">разрешено</span> (без специальных ограничений, кроме общего правила)</li>
+          <li><b>Пятница/суббота:</b><br>&nbsp;&nbsp;— для <b>I–IV классов</b> — <span class="highlight">запрещено</span>;<br>&nbsp;&nbsp;— для <b>V–XI классов</b> — <span class="highlight">запрещено после 3-го урока</span></li>
+          <li><b>На последнем учебном часе</b> в любой день недели — <span class="highlight">запрещено</span> <span class="highlight">п. 67</span></li>
+          <li><b>Домашние задания на каникулы</b> — запрещены <span class="highlight">Кодекс об образовании</span></li>
+          <li><b>Задания со звёздочкой</b> на дом — запрещены</li>
+        </ul>
+      </div>
+      <div class="sanpin-card">
+        <div class="sc-icon">📝</div>
+        <h4>Требования к содержанию контрольных работ</h4>
+        <ul>
+          <li>Количество контрольных работ и требования к их проверке устанавливаются <b>Методическими рекомендациями по формированию культуры устной и письменной речи</b> (утв. 21.08.2023, ред. от 15.11.2024) <span class="highlight">ИМП</span></li>
+          <li>Контрольные работы по <b>информатике</b> включают теоретические вопросы (письменно) и практические задания (на компьютере) <span class="highlight">Метод. рекомендации</span></li>
+          <li>Если на контрольную отводится <b>два учебных часа</b>, запись в журнале размещается на двух строках с указанием одной даты <span class="highlight">п. 110</span></li>
+          <li>На следующем уроке после контрольной работы целесообразно провести <b>урок коррекции знаний</b> с работой над ошибками <span class="highlight">ИМП, приложение 5</span></li>
+        </ul>
+      </div>
+      <div class="sanpin-card">
+        <div class="sc-icon">🎯</div>
+        <h4>Тематический контроль</h4>
+        <ul>
+          <li>Проводится с целью проверки и оценки освоения учебного материала определённой темы (тем) <span class="highlight">Правила аттестации</span></li>
+          <li>Осуществляется посредством <b>контрольных работ</b>, а также <b>тематических самостоятельных работ</b> <span class="highlight">Правила аттестации</span></li>
+          <li>Количество и виды самостоятельных работ (в отличие от контрольных) определяются учителем с учётом специфики предмета <span class="highlight">методические рекомендации</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      <b>Источники:</b> постановление Совета Министров Республики Беларусь от 07.08.2019 № 525 «Специфические санитарно-эпидемиологические требования к содержанию и эксплуатации учреждений образования» (в ред. от 12.07.2024 № 502); Методические рекомендации по формированию культуры устной и письменной речи (утв. 21.08.2023, ред. от 15.11.2024); ИМП «Об организации образовательного процесса» на 2026/2027 учебный год (приложения 5, 6, 11).
+    </div>
+  </div>
+
+  <!-- ========== 4. ЖУРНАЛ ========== -->
+  <div id="tab-journal" class="tab-content">
+    <h2>Правила заполнения классного журнала</h2>
+    <p style="font-size:14px; margin-bottom:12px;">Порядок ведения классного журнала определяется постановлением Министерства образования Республики Беларусь от 27 января 2023 г. № 28 «О типовых формах классного журнала» (с изменениями от 21.11.2024 № 166). Ниже — ключевые требования.</p>
+    <div class="rules-box">
+      <h3>Общие требования</h3>
+      <ul class="rules-list">
+        <li><strong>Своевременность:</strong> журнал заполняется в день проведения учебного занятия. Отметки за письменные работы выставляются не позднее даты следующего урока по предмету.</li>
+        <li><strong>Аккуратность:</strong> записи ведутся шариковой ручкой синего или фиолетового цвета, разборчиво и без помарок.</li>
+        <li><strong>Единый язык:</strong> все записи выполняются на одном из государственных языков (русском или белорусском).</li>
+        <li><strong>Запрет на исправления:</strong> исправление уже выставленных отметок категорически запрещено. При ошибочной записи она аккуратно зачёркивается, рядом ставится правильная, факт исправления заверяется подписью учителя и директора.</li>
+      </ul>
+    </div>
+    <div class="rules-box">
+      <h3>Выставление текущих и итоговых отметок</h3>
+      <ul class="rules-list">
+        <li><strong>Текущие отметки:</strong> выставляются в день проведения урока. При проведении письменных работ — не позднее следующего урока по данному предмету.</li>
+        <li><strong>Отметки за четверть (полугодие):</strong> выставляются как среднее арифметическое текущих отметок с учётом преобладающего или наивысшего балла (по усмотрению педагога) согласно постановлению № 184 (с изменениями № 43).</li>
+        <li><strong>Годовая отметка:</strong> выставляется на основании отметок за четверти (полугодия) с учётом итоговой аттестации, если она предусмотрена.</li>
+        <li><strong>Недопустимость символов:</strong> запрещается ставить в журнале точки, отметки с минусом или плюсом, а также другие символы, не предусмотренные формой журнала.</li>
+      </ul>
+    </div>
+    <div class="rules-box">
+      <h3>Записи содержания учебных занятий и домашних заданий</h3>
+      <ul class="rules-list">
+        <li><strong>Содержание урока:</strong> запись должна быть краткой и лаконичной, соответствовать календарно-тематическому планированию.</li>
+        <li><strong>Домашнее задание:</strong> записывается со строчной буквы, с указанием страниц, номеров заданий и параграфов.</li>
+        <li><strong>Отметка об отсутствии:</strong> на левой странице журнала напротив фамилии отсутствующего ученика ставится буква «н».</li>
+      </ul>
+    </div>
+    <div class="rules-box">
+      <h3>Списки учащихся и особые случаи</h3>
+      <ul class="rules-list">
+        <li><strong>Списки учащихся:</strong> заполняются в алфавитном порядке (фамилия и инициалы). При наличии параллельных классов указывается литера (например, 5 «А» класс).</li>
+        <li><strong>Выбытие и прибытие:</strong> все изменения в списках фиксируются только на основании приказа руководителя учреждения образования с указанием номера и даты приказа. Самовольное вычёркивание или дописывание фамилий запрещено.</li>
+        <li><strong>Смена фамилии:</strong> до конца учебного года в журнале сохраняется прежняя фамилия учащегося, новая записывается с начала следующего учебного года.</li>
+        <li><strong>Сводная ведомость:</strong> в конце учебного года классный руководитель заполняет сводную таблицу учёта результатов учебной деятельности и поведения учащихся.</li>
+      </ul>
+    </div>
+    <p class="doc-ref">Основание: постановление Министерства образования Республики Беларусь от 27.01.2023 № 28 «О типовых формах классного журнала» (в ред. от 21.11.2024 № 166); инструктивно-методические письма МО РБ; локальная Инструкция по делопроизводству учреждения образования.</p>
+  </div>
+
+  <!-- ========== 5. ФУНКЦИОНАЛЬНАЯ ГРАМОТНОСТЬ ========== -->
+  <div id="tab-fg" class="tab-content">
+    <h2>Функциональная грамотность: что это и зачем</h2>
+    <div class="fg-def">
+      <b>Функциональная грамотность</b> — это способность человека использовать приобретаемые в течение жизни знания, умения и навыки для решения широкого спектра жизненных задач в различных сферах человеческой деятельности. В школе она формируется не отдельным предметом, а <b>средствами всех учебных предметов</b>, включая математику, физику и информатику.
+    </div>
+    <p style="font-size:14px;">Ключевая роль в формировании функциональной грамотности принадлежит <b>дидактическим заданиям</b>, в основу которых положены учебные ситуации практико-ориентированного характера, <b>не содержащие готовых образцов и алгоритмов решения</b>. Для их выполнения требуется интеграция межпредметных знаний и универсальные учебные действия: поиск, обработка, интерпретация и оценка информации.</p>
+    <h3>Основные компоненты функциональной грамотности</h3>
+    <div class="fg-components">
+      <div class="fg-comp"><b>Читательская</b>Понимание, осмысление, извлечение и интерпретация информации из текстов разных форматов.</div>
+      <div class="fg-comp"><b>Математическая</b>Применение математического аппарата для решения практических задач, работа с данными, оценка результатов.</div>
+      <div class="fg-comp"><b>Естественнонаучная</b>Научное объяснение явлений, понимание особенностей исследования, интерпретация данных и выводы.</div>
+      <div class="fg-comp"><b>Финансовая</b>Работа с финансовой информацией, планирование бюджета, оценка рисков и выгод.</div>
+    </div>
+    <h2>Примеры заданий по предметам</h2>
+    <p style="font-size:14px;">Ниже — примеры практико-ориентированных заданий, которые можно использовать на уроках и факультативных занятиях. Обратите внимание: <b>готовых алгоритмов нет</b> — ученик должен сам выбрать способ решения.</p>
+    <div class="fg-task">
+      <span class="subject-tag tag-math">Математика</span>
+      <h4>«Соленый суп» (тема «Проценты»)</h4>
+      <div class="task-text">Мама варит любимый суп. Масса супа — 2000 г. В суп нужно добавить соль. Суп считается <b>солёным</b>, если процент соли в нём превышает 15%. Каким получится суп, если мама положит 120 г соли? Если суп окажется солёным — как исправить ситуацию?</div>
+      <div class="task-source">Основа: трансформация стандартной задачи на проценты в практико-ориентированную ситуацию.</div>
+    </div>
+    <div class="fg-task">
+      <span class="subject-tag tag-math">Математика</span>
+      <h4>«Семейный бюджет и покупка автомобиля»</h4>
+      <div class="task-text">Семье необходимо приобрести новый автомобиль стоимостью 30 000 белорусских рублей. На выбор представлено три стратегии: покупка за наличные, кредит с первоначальным взносом, лизинг. Сравните стратегии, рассчитайте итоговую переплату и предложите оптимальный вариант с учётом ежемесячного дохода семьи.</div>
+      <div class="task-source">Пример комплексного задания с финансовым контекстом.</div>
+    </div>
+    <div class="fg-task">
+      <span class="subject-tag tag-phys">Физика</span>
+      <h4>«Почему нельзя перебегать улицу перед транспортом?» (механика)</h4>
+      <div class="task-text">Объясните с точки зрения физики, почему пешеходу опасно перебегать дорогу перед движущимся автомобилем. Какие величины (скорость, тормозной путь, время реакции) влияют на безопасность? Предложите, как можно оценить безопасное расстояние до приближающегося транспорта.</div>
+      <div class="task-source">Пример задания на научное объяснение явления (естественнонаучная грамотность).</div>
+    </div>
+    <div class="fg-task">
+      <span class="subject-tag tag-phys">Физика</span>
+      <h4>«Горячий чай» (тепловые явления)</h4>
+      <div class="task-text">Осенние холода располагают к частому чаепитию. Чай можно разлить в разные кружки: керамическую, стеклянную, металлическую. Какая ёмкость лучше сохранит тепло? Обоснуйте ответ, используя знания о теплопроводности, и предложите способ проверки на практике.</div>
+      <div class="task-source">Пример ситуационной задачи по физике.</div>
+    </div>
+    <div class="fg-task">
+      <span class="subject-tag tag-inf">Информатика</span>
+      <h4>«Оплата электроэнергии» (электронные таблицы)</h4>
+      <div class="task-text">Семья израсходовала за сутки определённое количество электроэнергии. Тариф — 0,1433 белорусских рубля за 1 кВт·ч. Средствами электронной таблицы подсчитайте суточные расходы семьи на электроэнергию. Продумайте возможные пути экономии и постройте диаграмму, показывающую структуру потребления.</div>
+      <div class="task-source">Практико-ориентированное задание по информатике с мультипредметным содержанием.</div>
+    </div>
+    <div class="fg-task">
+      <span class="subject-tag tag-inf">Информатика</span>
+      <h4>«Безопасность в сети» (кибербезопасность)</h4>
+      <div class="task-text">Выберите из списка основные признаки заражения компьютера вредоносными программами и дополните список ещё двумя признаками. Составьте памятку для одноклассников «Как распознать вредоносную программу и что делать».</div>
+      <div class="task-source">Задание на функциональную грамотность в области безопасности (информатика).</div>
+    </div>
+    <h2>Рекомендации учителю</h2>
+    <div class="rules-box">
+      <h3>Как строить задания на функциональную грамотность</h3>
+      <ul class="rules-list">
+        <li><strong>Берите реальные ситуации:</strong> покупки, ремонт, тарифы, путешествия, бытовые приборы, здоровье, экология. Ситуация должна быть понятна ученику и не содержать готового алгоритма.</li>
+        <li><strong>Трансформируйте стандартные задачи:</strong> почти любое упражнение можно превратить в практико-ориентированное, добавив жизненный контекст и убрав прямую подсказку на способ решения.</li>
+        <li><strong>Требуйте интерпретации:</strong> ученик должен не только получить число, но и объяснить, что оно значит в данной ситуации, предложить вывод или решение.</li>
+        <li><strong>Используйте межпредметные связи:</strong> задания по информатике могут опираться на физику или математику, задания по физике — на математические расчёты. Это усиливает функциональный эффект.</li>
+        <li><strong>Оценивайте не только результат:</strong> учитывайте ход рассуждения, выбор способа, качество интерпретации и аргументацию вывода.</li>
+      </ul>
+    </div>
+    <h2>Где искать материалы: ссылки и ресурсы</h2>
+    <p style="font-size:14px;">Ниже — проверенные официальные ресурсы, которые можно открыть прямо со страницы. Нажмите на карточку, чтобы перейти по ссылке.</p>
+    <div class="link-cards">
+      <a class="link-card" href="https://adu.by/ru/pedagogam/normativnye-pravovye-dokumenty.html?view=category&id=577" target="_blank" rel="noopener">
+        <div class="lc-icon">🎯</div>
+        <div class="lc-title">Страница НИКО на adu.by</div>
+        <div class="lc-desc">Официальная страница Национального исследования качества образования: цели, структура, анонсы и материалы НИКО-2026.</div>
+        <span class="lc-url">adu.by/ru/pedagogam/normativnye-pravovye-dokumenty.html?view=category&id=577</span>
+      </a>
+      <a class="link-card" href="https://niko.unibel.by/" target="_blank" rel="noopener">
+        <div class="lc-icon">💻</div>
+        <div class="lc-title">Тренировочная платформа НИКО</div>
+        <div class="lc-desc">Онлайн-тесты в интерактивном режиме. Здесь можно пройти тренировочные задания и ознакомиться с форматом вопросов.</div>
+        <span class="lc-url">niko.unibel.by</span>
+      </a>
+      <a class="link-card" href="https://adu.by/ru/component/content/article/trenirovochnyezadaniya-matematicheskaya-gramotnost.html?catid=577&Itemid=101" target="_blank" rel="noopener">
+        <div class="lc-icon">📐</div>
+        <div class="lc-title">Тренировочные задания: математическая грамотность</div>
+        <div class="lc-desc">Раздел на adu.by с примерами заданий по математической грамотности. Рекомендуется проверять актуальность.</div>
+        <span class="lc-url">adu.by/ru/component/content/article/trenirovochnyezadaniya...</span>
+      </a>
+      <a class="link-card" href="https://www.adu.by/images/2023/12/did-mat-izuch-issled-dokaz-5-6kl.pdf" target="_blank" rel="noopener">
+        <div class="lc-icon">📘</div>
+        <div class="lc-title">Пособие «Функциональная грамотность: изучаем, исследуем, доказываем» (5–6 классы)</div>
+        <div class="lc-desc">Готовые ситуационные задачи в формате PDF, которые можно использовать прямо на уроках.</div>
+        <span class="lc-url">adu.by/images/2023/12/did-mat-izuch-issled-dokaz-5-6kl.pdf</span>
+      </a>
+      <a class="link-card" href="https://adu.by/" target="_blank" rel="noopener">
+        <div class="lc-icon">📚</div>
+        <div class="lc-title">Национальный образовательный портал (adu.by)</div>
+        <div class="lc-desc">Главный хаб: раздел «Функциональная грамотность», УМК факультативных занятий, дидактические материалы, примеры заданий.</div>
+        <span class="lc-url">adu.by</span>
+      </a>
+      <a class="link-card" href="https://edu.gov.by/" target="_blank" rel="noopener">
+        <div class="lc-icon">🏛️</div>
+        <div class="lc-title">Министерство образования РБ</div>
+        <div class="lc-desc">Официальные нормативные документы, новости, методические рекомендации и обновления по итоговой аттестации.</div>
+        <span class="lc-url">edu.gov.by</span>
+      </a>
+    </div>
+    <div class="niko-banner">
+      <h3>Связь с НИКО</h3>
+      <p>В 2026/2027 учебном году НИКО будет оценивать функциональную грамотность школьников, включая математическую и естественнонаучную составляющие. Задания и подходы, представленные выше, помогут целенаправленно готовить учащихся к этому исследованию. Перейдите по ссылкам, чтобы начать тренировку или ознакомиться с официальной информацией.</p>
+      <a href="https://adu.by/ru/pedagogam/normativnye-pravovye-dokumenty.html?view=category&id=577" target="_blank" rel="noopener">Официальная страница НИКО</a>
+      <a href="https://niko.unibel.by/" target="_blank" rel="noopener">Тренировочная платформа</a>
+    </div>
+  </div>
+
+  <!-- ========== 6. СОВРЕМЕННЫЙ УРОК ========== -->
+  <div id="tab-lesson" class="tab-content">
+    <h2>Современный урок математики: от традиции к деятельности</h2>
+    <p style="font-size:14px; margin-bottom:12px;">Современные образовательные стандарты требуют перехода от традиционной модели обучения к <b>деятельностной парадигме</b>, где учитель выступает не транслятором информации, а <b>организатором познавательной деятельности</b>. В математике этот подход особенно актуален, так как позволяет сформировать глубокое понимание концепций вместо механического заучивания формул.</p>
+    <div class="lesson-compare">
+      <div class="compare-col compare-old">
+        <h4>Традиционный урок</h4>
+        <ul>
+          <li>Учитель — источник знаний</li>
+          <li>Фронтальная форма работы</li>
+          <li>Оценка по результату</li>
+          <li>Ошибки исправляет учитель</li>
+        </ul>
+      </div>
+      <div class="compare-col compare-new">
+        <h4>Современный (деятельностный) урок</h4>
+        <ul>
+          <li>Учитель — организатор деятельности</li>
+          <li>Групповая, парная, индивидуальная работа</li>
+          <li>Оценка по процессу и результату</li>
+          <li>Ошибки анализируются учениками</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#555; margin-bottom:20px;">Ключевые принципы деятельностного подхода: субъектность обучения (учащийся — активный участник познания), ориентация на результат (формирование УУД), принцип минимакса (каждый продвигается в своём темпе, но не ниже базового уровня), рефлексивность (осознание способов и результатов деятельности).</p>
+
+    <h2>Структура современного урока (этапы)</h2>
+    <p style="font-size:14px; margin-bottom:12px;">Ниже — универсальная структура урока «открытия» нового знания, соответствующая деятельностному подходу. Она может быть адаптирована под конкретный тип урока.</p>
+    <div class="stage-flow">
+      <div class="stage-step"><div class="stage-num">1</div><div class="stage-body"><b>Мотивация (самоопределение) к учебной деятельности</b><span>Создание условий для возникновения внутренней потребности включения в деятельность («хочу» — «надо» — «могу»). Учитель высказывает добрые пожелания, выражает поддержку; учащиеся осознают нормы учебной деятельности.</span></div><div class="stage-time">1–2 мин</div></div>
+      <div class="stage-step"><div class="stage-num">2</div><div class="stage-body"><b>Актуализация знаний и фиксация затруднения в пробном действии</b><span>Воспроизведение знаний, достаточных для построения нового способа; активизация мыслительных операций; фиксация возникшего затруднения при выполнении пробного задания.</span></div><div class="stage-time">5–7 мин</div></div>
+      <div class="stage-step"><div class="stage-num">3</div><div class="stage-body"><b>Выявление места и причины затруднения</b><span>Учащиеся анализируют шаг за шагом выполненные операции, фиксируют место и причину затруднения, соотносят свои действия с изученными способами.</span></div><div class="stage-time">3–4 мин</div></div>
+      <div class="stage-step"><div class="stage-num">4</div><div class="stage-body"><b>Построение проекта выхода из затруднения</b><span>Постановка целей учебной деятельности и выбор способа и средств их реализации. Учащиеся самостоятельно формулируют цель и план действий.</span></div><div class="stage-time">4–6 мин</div></div>
+      <div class="stage-step"><div class="stage-num">5</div><div class="stage-body"><b>Реализация построенного проекта</b><span>«Открытие» нового знания: исследовательская работа в группах, вывод правила, составление алгоритма, построение модели.</span></div><div class="stage-time">10–15 мин</div></div>
+      <div class="stage-step"><div class="stage-num">6</div><div class="stage-body"><b>Первичное закрепление с проговариванием во внешней речи</b><span>Решение типовых заданий с обязательным проговариванием вслух нового способа действия. Формы: фронтальная работа, работа в парах, комментирование у доски.</span></div><div class="stage-time">5–7 мин</div></div>
+      <div class="stage-step"><div class="stage-num">7</div><div class="stage-body"><b>Самостоятельная работа с самопроверкой по эталону</b><span>Выполнение самостоятельной работы, проверка по эталону, фиксация результатов. Учитель создаёт ситуацию успеха для каждого ученика.</span></div><div class="stage-time">4–5 мин</div></div>
+      <div class="stage-step"><div class="stage-num">8</div><div class="stage-body"><b>Включение нового знания в систему знаний и повторение</b><span>Решение заданий, в которых новое знание используется вместе с ранее изученным; установление межпредметных связей.</span></div><div class="stage-time">5–7 мин</div></div>
+      <div class="stage-step"><div class="stage-num">9</div><div class="stage-body"><b>Рефлексия учебной деятельности на уроке</b><span>Соотнесение цели и результатов, самооценка деятельности, фиксация степени соответствия. Приёмы: «Лестница успеха», «Светофор», «Шесть шляп мышления» и др.</span></div><div class="stage-time">2–3 мин</div></div>
+    </div>
+
+    <h2>Алгоритм проектирования урока</h2>
+    <div class="rules-box">
+      <ul class="rules-list">
+        <li><strong>Выделить и сформулировать новое знание</strong> — что именно учащиеся должны «открыть» на уроке.</li>
+        <li><strong>Смоделировать способ «открытия» нового знания</strong> — через какую задачу, проблемную ситуацию или исследование.</li>
+        <li><strong>Вычленить мыслительные операции</strong>, используемые при «открытии» (анализ, синтез, сравнение, обобщение).</li>
+        <li><strong>Определить необходимые ЗУН и способы их повторения</strong> на этапе актуализации.</li>
+        <li><strong>Подобрать упражнения для этапа актуализации</strong> — они должны «подвести» к затруднению.</li>
+        <li><strong>Смоделировать затруднение и способ его фиксации</strong> — учащиеся должны осознать, чего им не хватает.</li>
+        <li><strong>Сконструировать диалоги</strong> для выявления причины затруднения и построения выхода из него.</li>
+        <li><strong>Составить самостоятельную работу и эталон для самопроверки</strong>.</li>
+        <li><strong>Определить приёмы организации первичного закрепления</strong>.</li>
+        <li><strong>Подобрать задания на включение нового знания в систему знаний и повторения</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Технологическая карта урока (шаблон)</h2>
+    <table>
+      <tr><th style="width:18%">Этапы урока</th><th style="width:8%">Время</th><th style="width:22%">Деятельность учителя</th><th style="width:22%">Деятельность учеников</th><th style="width:15%">Формы и методы</th><th style="width:15%">Прогнозируемый результат</th></tr>
+      <tr><td>1. Организационно-мотивационный этап</td><td>1–2 мин</td><td>Организует, управляет деятельностью, создаёт мотивацию</td><td>Концентрируют внимание, настраиваются на работу</td><td>Фронтальная, беседа</td><td>Положительная мотивация к деятельности</td></tr>
+      <tr><td>2. Этап целеполагания</td><td>3–4 мин</td><td>Стимулирует, осуществляет совместное целеполагание, создаёт проблемную ситуацию</td><td>Определяют цели, формулируют проблему</td><td>Проблемный диалог</td><td>Осознание цели и задач урока</td></tr>
+      <tr><td>3. Операционно-познавательный этап: введение нового материала</td><td>15–20 мин</td><td>Организует работу с литературой, консультирует, организует дискуссию, демонстрирует, помогает</td><td>Воспринимают, осмысливают, выполняют задания, анализируют, обобщают</td><td>Групповая, парная, индивидуальная</td><td>«Открытие» нового знания, первичное закрепление</td></tr>
+      <tr><td>4. Контрольно-оценочный этап: диагностические задания, рефлексия</td><td>5–7 мин</td><td>Проводит диагностику, организует рефлексию, корректирует</td><td>Выполняют диагностические задания, оценивают свою работу</td><td>Самостоятельная работа, самопроверка</td><td>Осознание результатов деятельности, самооценка</td></tr>
+      <tr><td>5. Подведение итогов урока</td><td>2–3 мин</td><td>Подводит итоги, комментирует домашнее задание</td><td>Слушают, записывают, задают вопросы</td><td>Фронтальная</td><td>Понимание итогов урока и перспектив</td></tr>
+    </table>
+
+    <h2>Примеры проектирования уроков</h2>
+    <div class="example-card">
+      <span class="ex-tag">Математика · 5 класс</span>
+      <h4>Урок «Решение уравнений» (деятельностный подход)</h4>
+      <div class="ex-text">
+        <b>Цель:</b> вывести алгоритм решения линейных уравнений.<br><br>
+        <b>Ход урока:</b><br>
+        <b>1. Актуализация (5 мин):</b> Игра «Найди лишнее»: 3x=6, x+5=8, x²=4, 2x−1=7.<br>
+        <b>2. Проблемная ситуация (7 мин):</b> Учитель показывает уравнение 3(x−2)+5=2(x+1). Вопрос: «Почему предыдущие способы не работают?»<br>
+        <b>3. Исследование (15 мин):</b> Работа в группах с карточками. 1 группа — раскрытие скобок; 2 группа — перенос слагаемых; 3 группа — приведение подобных.<br>
+        <b>4. Презентация решений (10 мин):</b> Каждая группа демонстрирует свой подход. Совместная выработка алгоритма.<br>
+        <b>5. Рефлексия (8 мин):</b> Метод «Шесть шляп мышления».
+      </div>
+      <div class="ex-note">Пример из материалов конференции по современным образовательным подходам на уроках математики (Могилёвский областной ИРО).</div>
+    </div>
+    <div class="example-card">
+      <span class="ex-tag">Математика · 6 класс</span>
+      <h4>Урок «Сравнение рациональных чисел»</h4>
+      <div class="ex-text">
+        <b>Этап изучения нового материала:</b> учитель предлагает учащимся выполнить исследовательское задание в группах, сформированных по дифференцированному признаку. Каждой группе необходимо, строго пользуясь алгоритмом действий, вывести и сформулировать правило, составить ветвь интеллект-карты в тетради. После выполнения работы представитель группы доносит результаты до всего класса и достраивает свою ветвь на доске.<br><br>
+        <b>Первичная проверка:</b> обсуждение применения сравнения рациональных чисел в жизненных ситуациях; задание на формирование функциональной грамотности — сравнение средней месячной температуры воздуха по областям Беларуси.
+      </div>
+      <div class="ex-note">Пример из Вестника Витебского областного ИРО (2024).</div>
+    </div>
+    <div class="example-card">
+      <span class="ex-tag">Математика · 5 класс</span>
+      <h4>Фрагмент урока по теме «Площади фигур»</h4>
+      <div class="ex-text">
+        <b>Мотивационный этап:</b> учитель показывает два участка земли разной формы и задаёт вопрос: «Как справедливо разделить землю между наследниками?»<br><br>
+        <b>Постановка учебной задачи:</b> учащиеся самостоятельно формулируют проблему: «Нам нужно научиться сравнивать площади неправильных фигур».<br><br>
+        <b>«Открытие» нового знания:</b> исследовательская работа в группах с раздаточным материалом (палетки, фигуры из картона).<br><br>
+        <b>Первичное закрепление:</b> математический конструктор — составление фигур заданной площади.<br><br>
+        <b>Рефлексия:</b> метод «Лестница успеха» — учащиеся отмечают, на какой ступени понимания находятся.
+      </div>
+      <div class="ex-note">Пример из материалов конференции по деятельностному подходу (Могилёвский областной ИРО).</div>
+    </div>
+
+    <h2>Приёмы рефлексии: 10 идей для урока математики</h2>
+    <p style="font-size:14px; margin-bottom:12px;">Рефлексия — обязательный этап современного урока. Она помогает ученику осознать, <b>что</b> он узнал, <b>как</b> он это сделал и <b>где</b> ему ещё нужно поработать. Ниже — 10 приёмов с конкретными примерами для математики. Выбирайте подходящий по настроению, теме и возрасту.</p>
+    <div class="reflection-grid">
+      <div class="refl-card refl-traffic">
+        <div class="refl-emoji">🚦</div>
+        <div class="refl-title">Светофор</div>
+        <div class="refl-desc">Ученик поднимает карточку: зелёная — понял и могу объяснить; жёлтая — понял, но есть сомнения; красная — нужно повторить.</div>
+        <div class="refl-example"><b>Пример на математике</b>После урока «Проценты»: «Зелёный — могу решить любую задачу; жёлтый — путаюсь в нахождении числа по проценту; красный — не понял алгоритм».</div>
+      </div>
+      <div class="refl-card refl-ladder">
+        <div class="refl-emoji">🪜</div>
+        <div class="refl-title">Лестница успеха</div>
+        <div class="refl-desc">Ученик ставит себя на одну из 4 ступеней: «не понял» → «понял, но не могу применить» → «понимаю и применяю» → «могу объяснить другому».</div>
+        <div class="refl-example"><b>Пример на математике</b>Тема «Квадратные уравнения»: верхняя ступень — «могу решить любое уравнение и объяснить способ однокласснику».</div>
+      </div>
+      <div class="refl-card refl-cinquain">
+        <div class="refl-emoji">✍️</div>
+        <div class="refl-title">Синквейн</div>
+        <div class="refl-desc">5 строк: 1) существительное-тема; 2) два прилагательных; 3) три глагола; 4) фраза-отношение; 5) существительное-вывод.</div>
+        <div class="refl-example"><b>Пример на математике</b>«Уравнение. / Линейное, квадратное. / Решаем, переносим, проверяем. / Важно соблюдать равновесие. / Ответ».</div>
+      </div>
+      <div class="refl-card refl-hats">
+        <div class="refl-emoji">🎩</div>
+        <div class="refl-title">Шесть шляп мышления</div>
+        <div class="refl-desc">Каждая шляпа — свой аспект: белая — факты, красная — эмоции, жёлтая — плюсы, чёрная — трудности, зелёная — идеи, синяя — итог.</div>
+        <div class="refl-example"><b>Пример на математике</b>Урок «Производная»: жёлтая — «понял геометрический смысл», чёрная — «трудно считать сложные производные», зелёная — «хочу разобраться через физику».</div>
+      </div>
+      <div class="refl-card refl-cloud">
+        <div class="refl-emoji">☁️</div>
+        <div class="refl-title">Облако тегов</div>
+        <div class="refl-desc">На доске — облако слов по теме. Ученик обводит 2–3 тега, которые лучше всего описывают его состояние, и объясняет выбор.</div>
+        <div class="refl-example"><b>Пример на математике</b>Урок «Площадь фигур»: «палетка, формула, сложно, интересно, самостоятельно, с подсказкой».</div>
+      </div>
+      <div class="refl-card refl-sentence">
+        <div class="refl-emoji">💬</div>
+        <div class="refl-title">Незаконченное предложение</div>
+        <div class="refl-desc">Учитель предлагает начало фразы, ученик продолжает. Простой и быстрый приём для конца урока — занимает 2–3 минуты.</div>
+        <div class="refl-example"><b>Пример на математике</b>«Сегодня я научился…», «Мне было трудно…», «Я могу объяснить, как…», «Мне понравилось задание, где…».</div>
+      </div>
+      <div class="refl-card refl-island">
+        <div class="refl-emoji">🏝️</div>
+        <div class="refl-title">Остров</div>
+        <div class="refl-desc">На доске карта: остров Знаний, риф Затруднений, бухта Успеха. Ученик прикрепляет стикер-кораблик, где он сейчас.</div>
+        <div class="refl-example"><b>Пример на математике</b>После темы «Дроби»: «Я в бухте Успеха — могу сложить дроби», «Плыву к рифу — путаю знаменатели».</div>
+      </div>
+      <div class="refl-card refl-tree">
+        <div class="refl-emoji">🌳</div>
+        <div class="refl-title">Дерево успеха</div>
+        <div class="refl-desc">На листе нарисовано дерево. Ученик приклеивает <b>лист</b> с достижением (что получилось) и <b>яблоко</b> с задачей (что ещё нужно сделать).</div>
+        <div class="refl-example"><b>Пример на математике</b>«🍃 Я понял, как строится график линейной функции», «🍎 Хочу потренироваться в нахождении коэффициента k».</div>
+      </div>
+      <div class="refl-card refl-smile">
+        <div class="refl-emoji">😊</div>
+        <div class="refl-title">Смайлики</div>
+        <div class="refl-desc">Ученики выбирают смайлик: 😀 — всё понятно; 😐 — есть вопросы; ☹️ — нужна помощь. Можно совмещать с коротким комментарием.</div>
+        <div class="refl-example"><b>Пример на математике</b>«😐 — понял, как решать систему, но не уверен в проверке корней».</div>
+      </div>
+      <div class="refl-card refl-mail">
+        <div class="refl-emoji">📮</div>
+        <div class="refl-title">Почта</div>
+        <div class="refl-desc">Ученики пишут короткое «письмо» учителю: что запомнилось, что вызвало трудности, что хотелось бы узнать на следующем уроке.</div>
+        <div class="refl-example"><b>Пример на математике</b>«Дорогой учитель, на уроке про теорему Пифагора мне было интересно решать задачу про лестницу. Хочу узнать, как её применяют в архитектуре».</div>
+      </div>
+    </div>
+    <div class="note">
+      <b>Как выбрать приём?</b> Для быстрой рефлексии в конце урока подойдут <b>«Светофор»</b>, <b>«Смайлики»</b> или <b>«Незаконченное предложение»</b> (2–3 минуты). Для глубокого осмысления — <b>«Синквейн»</b>, <b>«Шесть шляп»</b> или <b>«Почта»</b> (5–7 минут). Для наглядности и эмоциональной разрядки — <b>«Дерево успеха»</b>, <b>«Остров»</b> или <b>«Лестница успеха»</b>. Меняйте приёмы, чтобы рефлексия не превращалась в привычную формальность.
+    </div>
+    <div class="note" style="margin-top:20px;">
+      <b>Источники:</b> материалы конференции «Современные образовательные подходы на учебных занятиях математики» (Могилёвский областной ИРО, 2025); Вестник Витебского областного ИРО (2024); схема технологической карты урока математики (Гродненский областной ИРО); материалы по проектированию уроков деятельностной направленности.
+    </div>
+  </div>
+
+  <!-- ========== 7. ВОСПИТАТЕЛЬНЫЙ ПОТЕНЦИАЛ ========== -->
+  <div id="tab-edu" class="tab-content">
+
+    <h2>Воспитательный потенциал уроков математики, физики и информатики в Республике Беларусь</h2>
+
+    <div class="edu-intro">
+      <b>Воспитание на уроке</b> — это не отдельный этап и не «добавка» к предметному содержанию. Это <b>система ценностных установок</b>, которая реализуется через отбор содержания, характер заданий, организацию взаимодействия и личный пример учителя. Предметы физико-математического цикла обладают значительным воспитательным ресурсом: они формируют <b>научное мировоззрение</b>, <b>логическую культуру</b>, <b>ответственность за результат</b>, <b>патриотизм</b> (через достижения отечественной науки и историю) и <b>готовность к осознанному выбору профессии</b>.
+    </div>
+
+    <p style="font-size:14px; margin-bottom:12px;">Согласно методическим рекомендациям и опыту белорусских педагогов, воспитательные задачи на уроках формулируются в нескольких направлениях: <b>гражданско-патриотическое</b>, <b>духовно-нравственное</b>, <b>трудовое и профессиональное</b>, <b>экологическое</b> и <b>здоровьесберегающее</b>. Ниже — конкретные примеры заданий по каждому предмету, которые позволяют реализовать эти направления <b>без отрыва от предметного содержания</b>.</p>
+
+    <!-- МАТЕМАТИКА -->
+    <h3>Математика</h3>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-math">Гражданско-патриотическое</span>
+        <h4>Задачи на историко-краеведческом материале</h4>
+        <div class="edu-desc">Использование данных о родном городе, его истории, культуре и достижениях для составления и решения задач.</div>
+        <div class="edu-example">
+          <b>Пример (3 класс)</b>
+          «Для пошива 6 одинаковых белорусских национальных костюмов...» — задача не только формирует вычислительный навык, но и знакомит с традиционной культурой.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-math">Духовно-нравственное</span>
+        <h4>Задачи о милосердии и заботе о природе</h4>
+        <div class="edu-desc">Решение задач, которые естественно подводят к беседе о нравственных качествах и ответственности за окружающий мир.</div>
+        <div class="edu-example">
+          <b>Пример (начальная школа)</b>
+          «Сколько синичек сидело у кормушки, если известно, что когда k синичек улетело, то у кормушки осталось 9 синичек?» — после решения можно обсудить, почему зимой важно подкармливать птиц.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-math">Экологическое</span>
+        <h4>Задачи о бережном отношении к ресурсам</h4>
+        <div class="edu-desc">Расчёты, связанные с экономией бумаги, воды, энергии, которые воспитывают ответственность за природу.</div>
+        <div class="edu-example">
+          <b>Пример</b>
+          «4 пуда макулатуры сберегают одно дерево, которое растёт 50–60 лет. Сколько деревьев мы сбережём, если насобираем 16 пудов макулатуры? (1 пуд ≈ 16 кг)». После решения — беседа о том, как ещё можно помочь природе.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-math">Трудовое/профессиональное</span>
+        <h4>Задачи с производственным содержанием</h4>
+        <div class="edu-desc">Расчёты, связанные с реальными технологическими процессами, экономикой предприятия, планированием бюджета.</div>
+        <div class="edu-example">
+          <b>Пример</b>
+          «Только за один день в городе выпускается около 400 тонн каучука, 27 тысяч шин, 0,4 тысячи кубометров сборного железобетона, 12 миллионов кВт электроэнергии. Сколько тонн каучука выпустят за неделю?».
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ФИЗИКА -->
+    <h3>Физика</h3>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-phys">Гражданско-патриотическое</span>
+        <h4>Задачи на основе достижений белорусской науки</h4>
+        <div class="edu-desc">Использование биографий и открытий белорусских учёных для формирования гордости за страну.</div>
+        <div class="edu-example">
+          <b>Пример (8–9 класс)</b>
+          При изучении электромагнитной индукции — рассказ о Якубе Наркевиче-Иодко, белорусском учёном, проводившем опыты с электрографией; при изучении физики полупроводников — о Нобелевском лауреате Жоресе Алфёрове.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-phys">Гражданско-патриотическое</span>
+        <h4>Задачи с региональным компонентом</h4>
+        <div class="edu-desc">Условия задач построены на данных о родном крае: его природе, культуре, экономике, выдающихся людях.</div>
+        <div class="edu-example">
+          <b>Пример (7 класс)</b>
+          «Водонапорные башни “Бася” и “Кася”...» — задача не только формирует навык расчёта гидростатического давления, но и знакомит с историей городского водоснабжения Гродно.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-phys">Духовно-нравственное</span>
+        <h4>Задачи о науке в годы Великой Отечественной войны</h4>
+        <div class="edu-desc">Обсуждение вклада учёных в победу, анализ прикладного значения физики для обороны.</div>
+        <div class="edu-example">
+          <b>Пример</b>
+          Деятельность А. Н. Севченко (светомаскировка военных объектов, совершенствование оптических приборов) и П. О. Сухого (создание бронированного штурмовика Су-6). Вопросы для обсуждения: как работы по оптике спасали жизни? Какие физические принципы были ключевыми в конструкции штурмовика?
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-phys">Политехническое/профессиональное</span>
+        <h4>Задачи о современной белорусской технике</h4>
+        <div class="edu-desc">Расчёты, связанные с реальными техническими устройствами, производимыми в Республике Беларусь.</div>
+        <div class="edu-example">
+          <b>Пример (11 класс, «Механические колебания и волны»)</b>
+          Задачи, связанные с автомобилем Geely Atlas Pro совместного белорусско-китайского предприятия «БелДжи»: определение периода и частоты колебаний автомобиля как пружинного маятника, длины волны и расстояния до препятствия, зафиксированного ультразвуковым парктроником.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ИНФОРМАТИКА -->
+    <h3>Информатика</h3>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-inf">Гражданско-патриотическое</span>
+        <h4>Создание изображений с национальной символикой</h4>
+        <div class="edu-desc">Практическая работа в графическом редакторе, направленная на изучение и сохранение культурного наследия.</div>
+        <div class="edu-example">
+          <b>Пример (7–8 класс, «Обработка растровых изображений»)</b>
+          Создание изображений Государственного флага Республики Беларусь, белорусского орнамента, мемориалов и памятников, эмблемы школы.
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-inf">Гражданско-патриотическое</span>
+        <h4>Проекты на основе местного историко-культурного материала</h4>
+        <div class="edu-desc">Разработка цифровых продуктов (презентаций, веб-страниц, баз данных) о родном крае.</div>
+        <div class="edu-example">
+          <b>Пример</b>
+          Темы презентаций: «Исторические места моей малой родины», «Наши выдающиеся соотечественники», «Беларусь в космосе». Темы баз данных: «Достопримечательности моего родного края», «Наши земляки – герои Великой Отечественной войны».
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-inf">Духовно-нравственное</span>
+        <h4>Задачи на кибербезопасность и цифровую этику</h4>
+        <div class="edu-desc">Обсуждение ответственности за информацию, защита персональных данных, распознавание недостоверного контента.</div>
+        <div class="edu-example">
+          <b>Пример (8–9 класс)</b>
+          Решение ситуационных задач на распознавание киберугроз (мошеннические действия в Интернете, навязчивая реклама). Разработка памятки «Как распознать вредоносную программу и что делать».
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <span class="edu-tag tag-edu-inf">Трудовое/профессиональное</span>
+        <h4>Проектные и командные задания</h4>
+        <div class="edu-desc">Работа в команде над цифровым продуктом формирует навыки сотрудничества и ответственности за общий результат.</div>
+        <div class="edu-example">
+          <b>Пример (8–9 класс)</b>
+          Проект «Киберпреступность и методы борьбы с ней» или «Криптовалюта – деньги будущего?». Работа требует распределения ролей, совместного планирования и защиты общего результата.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- РЕКОМЕНДАЦИИ -->
+    <h2>Как реализовать воспитательный потенциал системно</h2>
+
+    <div class="rules-box">
+      <h3>Три уровня реализации</h3>
+      <ul class="rules-list">
+        <li><strong>Уровень содержания:</strong> подбор задач и текстов с воспитательным контекстом (история, краеведение, достижения науки и техники, нравственные дилеммы). Это не требует менять программу — достаточно заменить абстрактные числа на осмысленные данные.</li>
+        <li><strong>Уровень организации деятельности:</strong> групповая работа, взаимопомощь, совместное обсуждение ошибок, защита мини-проектов. Воспитание происходит через <b>опыт взаимодействия</b>, а не через декларацию ценностей.</li>
+        <li><strong>Уровень личности учителя:</strong> уважительное отношение к ученику, последовательность требований, честность в оценке, интерес к предмету и к жизни страны — это самый сильный, хотя и наименее «технологичный» фактор.</li>
+      </ul>
+    </div>
+
+    <div class="rules-box">
+      <h3>Чего избегать</h3>
+      <ul class="rules-list">
+        <li><strong>Назидательности:</strong> воспитательный смысл должен <b>вытекать из задачи</b>, а не приклеиваться к ней в виде морали в конце.</li>
+        <li><strong>Формального подхода:</strong> если задача не вызывает эмоционального отклика, воспитательный эффект близок к нулю. Лучше меньше, но глубже.</li>
+        <li><strong>Подмены предметного содержания:</strong> воспитательная задача не должна «съедать» математическую или физическую суть задания. Наоборот, она должна <b>усиливать</b> мотивацию к решению.</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <b>Источники:</b> материалы Национального образовательного портала (adu.by) и Национального института образования; опыт учителей физики (Могилёвский, Гродненский областные ИРО); инструктивно-методические письма Министерства образования Республики Беларусь; статьи в журнале «Народная асвета» и сборники педагогического опыта.
+    </div>
+
+  </div>
+
+  <!-- ================= ПЕЧАТЬ ================= -->
+  <div class="print">
+    <button class="btn" onclick="window.print()">🖨 Распечатать всё</button>
+  </div>
+
+</div>
+
+<script>
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].classList.remove("active");
+  }
+  tablinks = document.getElementsByClassName("tab-btn");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+  document.getElementById(tabName).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+</script>
+
+</body>
+</html>
